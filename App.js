@@ -1,38 +1,51 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, Text, View,TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
+import Header from './components/header';
+import TodoItem from './components/todoItem';
+import AddTodo from './components/addTodo';
 
 export default function App() {
-  const [people, setPeople] = useState([
-    { name: 'shaun', id: '1' },
-    { name: 'yoshi', id: '2' },
-    { name: 'mario', id: '3' },
-    { name: 'luigi', id: '4' },
-    { name: 'peach', id: '5' },
-    { name: 'toad', id: '6' },
-    { name: 'bowser', id: '7' },
+  const [todos, setTodos] = useState([
+    { text: 'buy coffee', key: '1' },
+    { text: 'create an app', key: '2' },
+    { text: 'play on the switch', key: '3' },
   ]);
 
-  const pressHandler = (id) => {
-    console.log(id);
+  const pressHandler = (key) => {
+    setTodos((prevTodos) => {
+      return prevTodos.filter(todo => todo.key != key);
+    });
+  };
 
-    setPeople((prevPeople) => {
-      return prevPeople.filter(person => person.id !== id);
-    })
+  const submitHandler = (text) => {
+    setTodos((prevTodos) => {
+      return [
+        {
+          text: text,
+          key: Math.random().toString()
+        },
+        ...prevTodos
+      ]
+    });
   };
 
   return (
     <View style={styles.container}>
-      <FlatList
-        numColumns={2}
-        data={people}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => pressHandler(item.id)}>
-            <Text style={styles.item}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      />
+      {/* header */}
+      <Header />
+      <View style={styles.content}>
+        {/* to form */}
+        <AddTodo submitHandler={submitHandler} />
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({ item }) => (
+              <TodoItem item={item} pressHandler={pressHandler} />
+            )}
+          />
+        </View>
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -42,17 +55,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: 40,
-    paddingHorizontal: 20,
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
-  item: {
-    marginTop: 24,
-    padding: 30,
-    backgroundColor: 'pink',
-    fontSize: 24,
-    marginHorizontal: 10,
-    marginTop: 24,
-  }
+  content: {
+    padding: 40,
+  },
+  list: {
+    marginTop: 20,
+  },
 });
