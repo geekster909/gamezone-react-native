@@ -1,9 +1,8 @@
 // import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
-
-import Home from './screens/home';
+import AppNavigator from "./routes/AppNavigator";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -16,8 +15,6 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return (
-    <Home />
-  );
+  return <AppNavigator />;
   
 }
