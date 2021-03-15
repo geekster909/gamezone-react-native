@@ -2,6 +2,7 @@
 import React from 'react';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+
 import AppNavigator from "./routes/AppNavigator";
 
 export default function App() {

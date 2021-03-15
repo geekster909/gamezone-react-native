@@ -1,39 +1,18 @@
 import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Home from '../screens/home';
-import ReviewDetails from '../screens/reviewDetails';
+import AboutStack from './AboutStack';
+import HomeStack from './HomeStack';
 
-const { Navigator, Screen } = createStackNavigator();
+const { Navigator, Screen } = createDrawerNavigator();
 
-const AppNavigator = () => (
+const Drawer = () => (
   <NavigationContainer>
-    <Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: "#eee",
-          height: 60,
-        },
-        headerTintColor: "#444",
-      }}
-    >
-      <Screen
-        name='Home'
-        component={Home}
-        options={{
-          title: "GameZone",
-        }}
-      />
-      <Screen
-        name='ReviewDetails'
-        component={ReviewDetails}
-        options={{
-          title: "Review Details",
-        }}
-      />
+    <Navigator initialRouteName="Home">
+      <Screen name="Home" component={HomeStack} />
+      <Screen name="About" component={AboutStack} />
     </Navigator>
   </NavigationContainer>
 );
 
-export default AppNavigator;
+export default Drawer;
