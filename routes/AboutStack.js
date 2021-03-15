@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Image } from 'react-native';
 
 import About from '../screens/about';
 import Header from '../shared/Header';
@@ -18,6 +19,7 @@ const AboutStack = () => (
       headerTitleStyle: {
         fontWeight: 'bold',
       },
+      headerBackground: () => <Image source = {require ('../assets/game_bg.png')} style={{height: '100%'}} />
     }}
   >
     <Screen

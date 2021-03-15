@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,7 +15,8 @@ export default function Header({ title }) {
         <View style={styles.header}>
             {/* icon for the menu */}
             <MaterialIcons name='menu' size={28} onPress={openMenu} style={styles.icon} />
-            <View>
+            <View style={styles.headerTitle}>
+                <Image source={require('../assets/heart_logo.png')} style={styles.headerImage} />
                 <Text style={styles.headerText}>{title}</Text>
             </View>
         </View>
@@ -39,5 +40,13 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         left: 16,
-    }
+    },
+    headerTitle: {
+        flexDirection: 'row',
+    },
+    headerImage: {
+        width: 26,
+        height: 26,
+        marginHorizontal: 10,
+    },
 });
