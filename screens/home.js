@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 import { globalStyles } from '../styles/global';
 import Card from '../shared/Card';
+import ReviewForm from '../screens/reviewForm';
 
 export default function Home({ navigation }) {
     const [modalOpen, setModalOpen] = useState(false);
@@ -13,6 +14,17 @@ export default function Home({ navigation }) {
         { title: 'Gotta Catch them All (again)', rating: 4, body: 'lorem ipsium', key: '2' },
         { title: 'Not so "Final" Fantasy', rating: 3, body: 'lorem ipsium', key: '3' },
     ]);
+
+    const addReview = review => {
+        review.key = Math.random().toString();
+        console.log(review.key);
+
+        setReviews(currentReviews => {
+            return [review, ...currentReviews];
+        });
+
+        setModalOpen(false);
+    };
 
     return (
         <View style={globalStyles.container}>
@@ -24,7 +36,7 @@ export default function Home({ navigation }) {
                         style={{...styles.modalToggle, ...styles.modalClose}}
                         onPress={() => setModalOpen(false)}
                     />
-                    <Text>Hello from the modal :)</Text>
+                    <ReviewForm addReview={addReview} />
                 </View>
             </Modal>
 
