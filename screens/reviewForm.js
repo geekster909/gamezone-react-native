@@ -4,6 +4,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 
 import { globalStyles } from '../styles/global';
+import FlatButton from '../shared/Button';
 
 const reviewSchema = yup.object({
     title: yup
@@ -65,11 +66,15 @@ export default function ReviewForm({ addReview }) {
                             onBlur={props.handleBlur('rating')}
                         />
                         <Text style={globalStyles.errorText}>{props.touched.rating &&props.errors.rating}</Text>
-                        <Button
+                        <FlatButton
+                            text='submit'
+                            onPress={props.handleSubmit}
+                        />
+                        {/* <Button
                             title='submit'
                             color='maroon'
                             onPress={props.handleSubmit}
-                        />
+                        /> */}
                     </View>
                 )}
             </Formik>
